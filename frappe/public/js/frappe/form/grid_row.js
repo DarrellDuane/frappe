@@ -350,6 +350,7 @@ export default class GridRow {
 						});
 
 					this.open_form_button.tooltip({ delay: { show: 600, hide: 100 } });
+					this.add_delete_row_button();
 				}
 
 				if (this.is_too_small()) {
@@ -360,6 +361,23 @@ export default class GridRow {
 				});
 			}
 		}
+	}
+
+	add_delete_row_button() {
+		// one-click delete next to the edit icon; hidden by CSS unless the row is editable
+		if (this.grid.df.cannot_delete_rows) return;
+		const delete_msg = __("Delete", "", "Delete grid row");
+		this.delete_row_button = $(`
+			<div class="btn-delete-row" data-toggle="tooltip" data-placement="right" title="${delete_msg}">
+				<a>${frappe.utils.icon("trash", "xs")}</a>
+			</div>
+		`)
+			.appendTo(this.open_form_button.parent())
+			.on("click", () => {
+				this.remove();
+				return false;
+			});
+		this.delete_row_button.tooltip({ delay: { show: 600, hide: 100 } });
 	}
 
 	add_column_configure_button() {

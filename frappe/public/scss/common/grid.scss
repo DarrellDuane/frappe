@@ -324,6 +324,16 @@
 		}
 	}
 
+	.btn-delete-row {
+		display: none;
+		line-height: unset;
+		margin-left: var(--margin-xs);
+	}
+
+	.editable-row .btn-delete-row {
+		display: block;
+	}
+
 	.editable-row {
 		// TODO: Dark and Light Mode
 		--control-bg: var(--neutral);
